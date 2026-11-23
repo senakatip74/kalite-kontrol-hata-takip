@@ -1,60 +1,70 @@
 # Kalite Kontrol ve Hata Takip Sistemi
 
-## 1. Proje Hakkında
+Güncel Yazılım Geliştirme Süreçleri ve DevOps dersi kapsamında geliştirilen bireysel web uygulaması.
 
-Bu proje, Güncel Yazılım Geliştirme Süreçleri ve DevOps dersi kapsamında geliştirilmektedir.
+## Problem ve hedef kullanıcı
+Küçük üretim işletmelerinde kalite kontrol sırasında bulunan hatalar dağınık notlarda tutulduğunda takip ve analiz zorlaşabilir. Bu uygulama kalite kontrol personelinin hata kaydı oluşturmasını, üretim sorumlularının hangi hata türlerinin öne çıktığını görmesini sağlar.
 
-Projenin amacı, üretim işletmelerinde kalite kontrol süreçlerinde tespit edilen hataların dijital ortamda kaydedilmesini, takip edilmesini ve analiz edilmesini sağlayan bir web uygulaması oluşturmaktır.
+## Teknolojiler
+- Python
+- Streamlit (web arayüzü)
+- SQLite (yerel, kalıcı veritabanı)
+- Git/GitHub (sürüm kontrolü)
+- GitHub Issues ve Projects (iş takibi)
 
-Üretim süreçlerinde karşılaşılan hataların düzenli olarak kayıt altına alınmaması, kalite kontrol faaliyetlerinin takip edilmesini zorlaştırabilmektedir. Geliştirilecek uygulama sayesinde hata kayıtlarının daha sistemli yönetilmesi ve hata türlerinin analiz edilmesi hedeflenmektedir.
+## İlk sürümdeki iki çalışan özellik
+1. **Hata kaydı oluşturma (#1):** Ürün adı, hata türü, açıklama ve hata adedi girip kaydedebilirsiniz. Bilgiler SQLite veritabanına yazılır.
+2. **Hata analizi (#2):** Kayıtlar hata türlerine göre gruplanır. Grafik ve tabloda tür bazında toplam hata adedi görünür.
 
-## 2. Hedef Kullanıcılar
+İleriki sürüme bırakılan işler: kayıt filtreleme (#3), hata durumunu güncelleme (#4), CSV dışa aktarma (#5).
 
-- Kalite kontrol personelleri
-- Üretim sorumluları
-- Küçük ve orta ölçekli üretim işletmeleri
-- Kalite yönetimi alanında çalışan kişiler
+## Kurulum ve çalıştırma
+Bilgisayarda Python 3.10 veya üzeri kurulu olmalıdır.
 
-## 3. Kullanılacak Teknolojiler
+1. Bu depoyu **Code > Download ZIP** ile indirin ve ZIP'i çıkartın; veya Git ile klonlayın:
+   ```bash
+   git clone https://github.com/senakatip74/kalite-kontrol-hata-takip.git
+   cd kalite-kontrol-hata-takip
+   ```
+2. Proje klasöründe terminal açıp bağımlılıkları kurun:
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
+   Windows'ta `python` komutu çalışmıyorsa `py` komutunu kullanabilirsiniz.
+3. Uygulamayı başlatın:
+   ```bash
+   python -m streamlit run app.py
+   ```
+4. Açılan tarayıcı sayfasını kullanın (genellikle http://localhost:8501).
 
-- Python: Uygulamanın geliştirilmesi
-- Streamlit: Web arayüzünün oluşturulması
-- SQLite: Verilerin saklanması
-- Git ve GitHub: Sürüm kontrolü
-- GitHub Projects: Görev yönetimi
+**Veriler:** İlk çalıştırmada `data/quality.db` dosyası otomatik oluşturulur. Veriler bilgisayarınızda saklanır; veritabanı GitHub'a gönderilmemelidir.
 
-## 4. Proje Özellikleri
+## İki özelliği nasıl deneyebilirsiniz?
+### 1. Hata kaydı oluşturma
+- Ürün adı: `Metal Parça A`, hata türü: `Çizik`, açıklama: `Yüzeyde çizik`, hata adedi: `2` girin.
+- **Kaydı ekle** düğmesine basın. Başarı mesajını ve kaydı **Kaydedilen hatalar** tablosunda görün.
+- Uygulamayı kapatıp tekrar başlatın. Kayıt hâlâ görünmelidir.
+- Ürün adını boş bırakıp kayıt yapmayı deneyin: hata mesajı görünmelidir.
 
-Proje kapsamında aşağıdaki özelliklerin geliştirilmesi planlanmaktadır:
+### 2. Hata analizi ve grafik
+- Yukarıdaki kayda ek olarak `Çizik` türünde **3**, `Ölçü hatası` türünde **4**, `Renk hatası` türünde **1** adet hata kaydı oluşturun.
+- **Hata analizi** bölümünde şu toplamları kontrol edin: Çizik = **5**, Ölçü hatası = **4**, Renk hatası = **1**; genel toplam = **10**.
+- Yeni kayıt eklediğinizde grafik ve analiz tablosu güncellenmelidir.
 
-1. Hata kaydı oluşturma
-2. Hata türlerine göre analiz ve grafik oluşturma
-3. Hata kayıtlarını filtreleme
-4. Hata durumunu güncelleme
-5. Hata kayıtlarını CSV olarak dışa aktarma
+## Otomatik testler
+```bash
+python -m unittest discover -s tests -v
+```
+Testler geçerli kayıt ekleme, kalıcılık, geçersiz girişleri reddetme ve üç farklı hata türünün doğru analizini kapsar.
 
-İlk geliştirme aşamasında hata kaydı oluşturma ve hata analizi özellikleri gerçekleştirilecektir.
+## Görevler ve pano
+- [Görev 1 – Hata kaydı oluşturma](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/1)
+- [Görev 2 – Hata analizi](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/2)
+- [Görev 3 – Filtreleme](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/3)
+- [Görev 4 – Durum güncelleme](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/4)
+- [Görev 5 – CSV indirme](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/5)
 
-## 5. Proje Yönetimi
+**GitHub Projects pano bağlantısı:** Pano oluşturulup depo ile ilişkilendirildikten sonra buraya eklenecek.
 
-Proje görevleri GitHub Projects üzerinde takip edilecektir.
-
-Görevler üç aşamada yönetilecektir:
-
-- Yapılacak
-- Devam Ediyor
-- Tamamlandı
-
-Proje panosu bağlantısı: Henüz oluşturulmadı.
-
-## 6. Kurulum ve Çalıştırma
-
-Uygulama geliştirildikten sonra gerekli kurulum komutları ve çalıştırma adımları bu bölüme eklenecektir.
-
-## 7. Özelliklerin Test Edilmesi
-
-İlk iki çalışan özelliğin nasıl kullanılacağı ve kabul kriterlerinin nasıl doğrulanacağı geliştirme tamamlandıktan sonra bu bölümde açıklanacaktır.
-
-## 8. Proje Durumu
-
-Proje geliştirme aşamasındadır. İlk hedef, iki temel özelliğin çalışır hâle getirilmesidir.
+## Geliştirme notu
+İş kartlarındaki kabul kriterleri ve kod commit'leri, yazılım geliştirme sürecinin takibi için kullanılmaktadır.

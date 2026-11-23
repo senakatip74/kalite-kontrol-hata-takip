@@ -61,7 +61,9 @@ Bilgisayarda Python 3.10 veya üzeri kurulu olmalıdır.
 
 **Bulut ortamı veri uyarısı:** Uygulama SQLite verilerini çalıştığı sunucudaki yerel dosyada saklar. Bu kayıtlar aynı çalışan örnekte oturumlar arasında görülebilir; ancak Streamlit Cloud sunucusu yeniden başlatılırsa veya yeniden dağıtılırsa **kalıcı olmaları garanti edilmez**. Bu nedenle bulut ortamındaki verileri örnek/test verisi olarak kullanın. Kalıcı bulut depolaması için ileride harici veritabanı gereklidir. Uygulamanın yerel Python kurulumunda SQLite verileri disk üzerinde kalıcıdır.
 
-**Canlı uygulama bağlantısı:** Yayımlandıktan sonra buraya eklenecek.
+**Canlı uygulama bağlantısı:** https://kalite-kontrol-hata-takip.streamlit.app/
+
+**Canlı ortamda doğrulanan örnek:** 23 Kasım 2026 tarihinde `Metal Parça A` / `Çizik` / `5` kaydı listede görünmüş, analiz grafiği ve toplam hata adedi `5` olarak görüntülenmiştir. Bu kontrol tek hata türüyle yapılmıştır; diğer kabul senaryoları ayrıca test edilmelidir.
 
 ## Otomatik testler
 ```bash
@@ -76,7 +78,7 @@ Testler geçerli kayıt ekleme, kalıcılık, geçersiz girişleri reddetme ve �
 - [Görev 4 – Durum güncelleme](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/4)
 - [Görev 5 – CSV indirme](https://github.com/senakatip74/kalite-kontrol-hata-takip/issues/5)
 
-**GitHub Projects pano bağlantısı:** Pano oluşturulup depo ile ilişkilendirildikten sonra buraya eklenecek.
+**GitHub Projects pano bağlantısı:** https://github.com/users/senakatip74/projects/1/views/1
 
 ## Geliştirme notu
 İş kartlarındaki kabul kriterleri ve kod commit'leri, yazılım geliştirme sürecinin takibi için kullanılmaktadır.

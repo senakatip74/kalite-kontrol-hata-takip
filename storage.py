@@ -60,3 +60,25 @@ def list_defects(db_path=DEFAULT_DATABASE):
                FROM defects ORDER BY id DESC"""
         ).fetchall()
     return [dict(row) for row in rows]
+
+
+def seed_demo_data_if_empty(db_path=DEFAULT_DATABASE):
+    """Veritabanı tamamen boşsa örnek kayıtları yalnızca bir kez oluştur."""
+    initialize_database(db_path)
+    examples = (
+        ("Metal Parça A", "Çizik", "Yüzeyde çizik", 5),
+        ("Metal Parça B", "Ölçü hatası", "Ölçü uygun değil", 3),
+        ("Metal Parça C", "Renk hatası", "Renk farklılığı", 2),
+    )
+    with connect(db_path) as connection:
+        connection.execute("BEGIN IMMEDIATE")
+        existing = connection.execute("SELECT 1 FROM defects LIMIT 1").fetchone()
+        if existing is not None:
+            return False
+        timestamp = datetime.now().astimezone().isoformat(timespec="seconds")
+        connection.executemany(
+            """INSERT INTO defects (product_name, error_type, description, quantity, created_at)
+               VALUES (?, ?, ?, ?, ?)""",
+            [(*example, timestamp) for example in examples],
+        )
+    return True

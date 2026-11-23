@@ -1,5 +1,6 @@
 """Kalite Kontrol ve Hata Takip Sistemi."""
 import streamlit as st
+from analysis import summarize_defects
 from storage import ERROR_TYPES, create_defect, list_defects
 
 st.set_page_config(page_title="Kalite Kontrol", page_icon="🔎", layout="wide")
@@ -21,6 +22,30 @@ if submitted:
         st.error(str(exc))
     else:
         st.success(f"#{new_id} numaralı hata kaydı oluşturuldu.")
+
+st.subheader("Hata analizi")
+summary = summarize_defects()
+if summary:
+    st.metric("Toplam hata adedi", sum(item["total_quantity"] for item in summary))
+    st.bar_chart(
+        {item["error_type"]: item["total_quantity"] for item in summary},
+        x_label="Hata türü",
+        y_label="Hata adedi",
+    )
+    st.dataframe(
+        [
+            {
+                "Hata türü": item["error_type"],
+                "Kayıt sayısı": item["record_count"],
+                "Toplam hata adedi": item["total_quantity"],
+            }
+            for item in summary
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
+else:
+    st.info("Analiz için önce en az bir hata kaydı oluşturun.")
 
 st.subheader("Kaydedilen hatalar")
 records = list_defects()

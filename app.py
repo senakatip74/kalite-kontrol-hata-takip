@@ -1,9 +1,10 @@
 """Kalite Kontrol ve Hata Takip Sistemi."""
 import streamlit as st
 from analysis import summarize_defects
-from storage import ERROR_TYPES, create_defect, list_defects
+from storage import ERROR_TYPES, create_defect, list_defects, seed_demo_data_if_empty
 
 st.set_page_config(page_title="Kalite Kontrol", page_icon="🔎", layout="wide")
+seed_demo_data_if_empty()
 st.title("Kalite Kontrol ve Hata Takip Sistemi")
 st.caption("Üretimde tespit edilen hataları kaydedin ve inceleyin.")
 

@@ -51,6 +51,18 @@ Bilgisayarda Python 3.10 veya üzeri kurulu olmalıdır.
 - **Hata analizi** bölümünde şu toplamları kontrol edin: Çizik = **5**, Ölçü hatası = **4**, Renk hatası = **1**; genel toplam = **10**.
 - Yeni kayıt eklediğinizde grafik ve analiz tablosu güncellenmelidir.
 
+## Streamlit Community Cloud üzerinden çalıştırma (Python kurulumu gerektirmez)
+
+1. https://share.streamlit.io/ adresine gidin ve GitHub hesabınızla giriş yapın.
+2. **Create app / New app** seçeneğini açın; **Deploy a public app from GitHub** yolunu seçin.
+3. Depo: `senakatip74/kalite-kontrol-hata-takip`, dal: `main`, ana dosya: `app.py` olarak ayarlayın.
+4. İsteğe bağlı bir uygulama adresi seçip **Deploy** düğmesine basın.
+5. Uygulama açılınca yukarıdaki iki özelliği tarayıcıda deneyin.
+
+**Bulut ortamı veri uyarısı:** Uygulama SQLite verilerini çalıştığı sunucudaki yerel dosyada saklar. Bu kayıtlar aynı çalışan örnekte oturumlar arasında görülebilir; ancak Streamlit Cloud sunucusu yeniden başlatılırsa veya yeniden dağıtılırsa **kalıcı olmaları garanti edilmez**. Bu nedenle bulut ortamındaki verileri örnek/test verisi olarak kullanın. Kalıcı bulut depolaması için ileride harici veritabanı gereklidir. Uygulamanın yerel Python kurulumunda SQLite verileri disk üzerinde kalıcıdır.
+
+**Canlı uygulama bağlantısı:** Yayımlandıktan sonra buraya eklenecek.
+
 ## Otomatik testler
 ```bash
 python -m unittest discover -s tests -v
